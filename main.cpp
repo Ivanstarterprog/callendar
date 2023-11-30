@@ -2,7 +2,7 @@
 * Автор - Нургазин И.В                      *
 * Блок - 4                                  *
 * Задача - 3                                *
-* Ссылка - https://onlinegdb.com/ob1pHB5h0  *
+* Ссылка - https://onlinegdb.com/hewhHG9pG  *
 ********************************************/
 #include <iostream>
 #include <iomanip>
@@ -31,33 +31,33 @@ void printCalendar(int year)
     int lastYear = year - 1;
     startingGap = (lastYear + lastYear / 4 - lastYear / 100 + lastYear / 400) % 7;
 
-    for (int i = 0; i < 12; i++)
+    for (int monthNum = 0; monthNum < 12; monthNum++)
     {
-        if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && i == 1)
+        if ((year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) && monthNum == 1)
             days = 29;
         else
-            days = monthDays[i];
+            days = monthDays[monthNum];
 
         cout << endl;
-        if (year == currentYear && currentMonth == i + 1)
+        if (year == currentYear && currentMonth == monthNum + 1)
         {
             cout << "\033[1;1;32m"
-                << "  ------------" << monthList[i] << "-------------"
+                << "  ------------" << monthList[monthNum] << "-------------"
                 << "\033[0m" << endl;
         }
-        else if (year < currentYear || (year == currentYear && i + 1 < currentMonth))
+        else if (year < currentYear || (year == currentYear && monthNum + 1 < currentMonth))
         {
             cout << "\033[31m"
-                << "  ------------" << monthList[i] << "-------------"
+                << "  ------------" << monthList[monthNum] << "-------------"
                 << "\033[0m" << endl;
         }
         else
         {
-            cout << "  ------------" << monthList[i] << "-------------"
+            cout << "  ------------" << monthList[monthNum] << "-------------"
                 << endl;
         }
 
-        if (year < currentYear || (year == currentYear && i + 1 <= currentMonth))
+        if (year < currentYear || (year == currentYear && monthNum + 1 <= currentMonth))
         {
             cout << "\033[1;33m"
                 << "  Пон  Втр  Срд  Чет  Пят";
@@ -72,34 +72,34 @@ void printCalendar(int year)
         {
             cout << "  Пон  Втр  Срд  Чет  Пят  Суб  Вос" << endl;
         }
-        int k;
-        for (k = 0; k < startingGap; k++)
+        int spaces;
+        for (spaces = 0; spaces < startingGap; spaces++)
             cout << "     ";
 
-        for (int j = 1; j <= days; j++)
+        for (int day = 1; day <= days; day++)
         {
-            k++;
-            if (year == currentYear && currentMonth == i + 1 && currentDay == j)
+            spaces++;
+            if (year == currentYear && currentMonth == monthNum + 1 && currentDay == day)
             {
-                cout << "\033[1;1;32m" << setw(5) << j << "\033[0m";
+                cout << "\033[1;1;32m" << setw(5) << day << "\033[0m";
             }
-            else if (year < currentYear || (year == currentYear && i + 1 < currentMonth) || (year == currentYear && i + 1 == currentMonth && j < currentDay))
+            else if (year < currentYear || (year == currentYear && monthNum + 1 < currentMonth) || (year == currentYear && monthNum + 1 == currentMonth && day < currentDay))
             {
-                cout << "\033[39m" << setw(5) << j << "\033[0m";
+                cout << "\033[39m" << setw(5) << day << "\033[0m";
             }
             else
             {
-                cout << "\033[31m" << setw(5) << setw(5) << j << "\033[0m";
+                cout << "\033[31m" << setw(5) << setw(5) << day << "\033[0m";
             }
-            if (k > 6)
+            if (spaces > 6)
             {
-                k = 0;
+                spaces = 0;
                 cout << endl;
             }
         }
-        if (k)
+        if (spaces)
             cout << endl;
-        startingGap = k;
+        startingGap = spaces;
     }
     return;
 }
